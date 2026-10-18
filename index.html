@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>你是西游记里的谁？· DISC 取经人格测试</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+    color:#33261A;
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    background:#FFF8EC;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-3;
+    background:
+      radial-gradient(900px 520px at 8% -10%, #FFE3B8 0%, transparent 62%),
+      radial-gradient(720px 440px at 96% 2%, #FFD9D2 0%, transparent 60%),
+      radial-gradient(860px 620px at 50% 112%, #DCF3EF 0%, transparent 62%),
+      #FFF8EC;
+  }
+
+  /* ---------- 背景装饰 ---------- */
+  .sky{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+  .sun{
+    position:absolute;top:-40px;right:-30px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle at 38% 34%, #FFD98A, #FFC15E 58%, #FFB347);
+    opacity:.55;filter:blur(1px);
+  }
+  .cloud{position:absolute;background:#fff;border-radius:100px;opacity:.72}
+  .cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+  .c1{width:120px;height:34px;top:12%;left:-30px;animation:drift 26s linear infinite}
+  .c1::before{width:54px;height:54px;top:-24px;left:16px}
+  .c1::after{width:38px;height:38px;top:-16px;left:62px}
+  .c2{width:170px;height:44px;top:34%;right:-50px;opacity:.5;animation:drift2 34s linear infinite}
+  .c2::before{width:74px;height:74px;top:-34px;left:24px}
+  .c2::after{width:50px;height:50px;top:-22px;left:96px}
+  .c3{width:96px;height:28px;top:70%;left:-20px;opacity:.42;animation:drift 40s linear infinite}
+  .c3::before{width:44px;height:44px;top:-20px;left:12px}
+  .c3::after{width:32px;height:32px;top:-13px;left:50px}
+  @keyframes drift{0%{transform:translateX(0)}100%{transform:translateX(120vw)}}
+  @keyframes drift2{0%{transform:translateX(0)}100%{transform:translateX(-120vw)}}
+  .star{position:absolute;width:10px;height:10px;background:#F0B429;border-radius:2px;opacity:.5;animation:twinkle 4s ease-in-out infinite}
+  .s1{top:22%;left:16%;transform:rotate(20deg)}
+  .s2{top:58%;right:12%;transform:rotate(-14deg);animation-delay:1.2s;background:#F272A0}
+  .s3{top:82%;left:70%;animation-delay:2.1s;background:#35A79C}
+  @keyframes twinkle{0%,100%{opacity:.15;transform:scale(.8) rotate(20deg)}50%{opacity:.65;transform:scale(1.15) rotate(20deg)}}
+
+  /* ---------- 布局 ---------- */
+  .wrap{max-width:720px;margin:0 auto;padding:38px 20px 80px;position:relative}
+  .screen{display:none}
+  .screen.active{display:block;animation:rise .5s cubic-bezier(.2,.8,.3,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+  /* ---------- 首页 ---------- */
+  .hero{text-align:center;padding-top:6px}
+  .pill{
+    display:inline-block;background:#fff;border:2.5px solid #33261A;border-radius:999px;
+    padding:7px 16px;font-size:12.5px;font-weight:800;letter-spacing:2px;color:#8A6A3A;
+    box-shadow:3px 3px 0 rgba(51,38,26,.12);margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(30px,7.4vw,46px);line-height:1.28;margin:0 0 16px;
+    font-weight:900;letter-spacing:1px;
+  }
+  .hl{
+    display:inline-block;position:relative;padding:0 8px;margin:0 2px;
+    color:#C2410C;transform:rotate(-2deg);
+  }
+  .hl::after{
+    content:"";position:absolute;left:-2px;right:-2px;bottom:2px;height:38%;z-index:-1;
+    background:#FFD98A;border-radius:6px;transform:rotate(1.5deg);
+  }
+  .lede{font-size:15.5px;line-height:1.85;color:#7A6752;margin:0 auto 30px;max-width:360px;font-weight:500}
+
+  .cast{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 34px}
+  .cast-item{
+    background:#fff;border:2.5px solid #33261A;border-bottom-width:4px;border-radius:20px;
+    padding:8px 4px 12px;text-align:center;box-shadow:0 6px 0 rgba(51,38,26,.09);
+    animation:bob 3.4s ease-in-out infinite;
+  }
+  .cast-item:nth-child(2){animation-delay:.4s}
+  .cast-item:nth-child(3){animation-delay:.8s}
+  .cast-item:nth-child(4){animation-delay:1.2s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .cast-face{
+    width:100%;aspect-ratio:1/1;border-radius:16px;display:grid;place-items:center;
+    background:var(--tl);margin-bottom:8px;overflow:hidden;
+  }
+  .cast-face svg{width:102%;height:102%;display:block}
+  .cast-item b{display:block;font-size:13px;font-weight:800}
+  .cast-item span{display:block;font-size:10.5px;font-weight:800;color:var(--tc);letter-spacing:1px;margin-top:3px}
+
+  .btn-primary{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:#E4572E;color:#fff;border:3px solid #33261A;border-radius:20px;
+    padding:17px 40px;font-size:17.5px;font-weight:900;letter-spacing:1.5px;
+    font-family:inherit;cursor:pointer;box-shadow:0 7px 0 #A83A19;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 9px 0 #A83A19}
+  .btn-primary:active{transform:translateY(5px);box-shadow:0 2px 0 #A83A19}
+  .hint{font-size:12.5px;color:#A08E78;margin:18px 0 0;letter-spacing:.5px}
+
+  /* ---------- 答题 ---------- */
+  .panel{
+    background:#FFFDF7;border:3px solid #33261A;border-radius:28px;
+    box-shadow:9px 10px 0 rgba(51,38,26,.09);padding:28px 24px 26px;
+  }
+  .quiz-top{display:flex;align-items:center;gap:14px;margin:0 0 20px}
+  .nav-btn{
+    flex:0 0 42px;height:42px;border-radius:14px;border:2.5px solid #33261A;background:#fff;
+    display:grid;place-items:center;cursor:pointer;font-size:17px;font-weight:900;color:#33261A;
+    box-shadow:0 3px 0 rgba(51,38,26,.16);transition:.15s;font-family:inherit;padding:0;
+  }
+  .nav-btn:hover{background:#FFF3DF}
+  .nav-btn:disabled{opacity:.32;cursor:not-allowed}
+  .prog{flex:1;height:14px;background:#F2E6D2;border-radius:999px;overflow:hidden;position:relative;border:2px solid #EDDFC8}
+  .prog-fill{
+    height:100%;width:0;border-radius:999px;transition:width .45s cubic-bezier(.2,.8,.3,1);
+    background:linear-gradient(90deg,#F0B429,#E4572E);
+  }
+  .count{font-size:13px;font-weight:900;color:#9A8468;letter-spacing:.5px;flex:0 0 auto;font-variant-numeric:tabular-nums}
+  .count b{color:#33261A;font-size:16px}
+
+  .qindex{font-size:12px;font-weight:800;letter-spacing:2px;color:#BF9A63;margin-bottom:10px}
+  .qtitle{font-size:clamp(19px,4.6vw,23px);font-weight:900;line-height:1.55;margin:0 0 22px;letter-spacing:.3px}
+  .qtitle.fade{animation:qin .38s ease both}
+  @keyframes qin{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+
+  .opts{display:grid;gap:11px}
+  .opt{
+    display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;
+    background:#fff;border:2.5px solid #EDDFC8;border-radius:18px;padding:15px 16px;
+    font-size:15.5px;font-weight:700;color:#33261A;cursor:pointer;font-family:inherit;
+    line-height:1.55;transition:transform .16s ease,border-color .16s,background .16s,box-shadow .16s;
+  }
+  .opt .k{
+    flex:0 0 28px;height:28px;border-radius:9px;background:#F7EDDC;color:#A08560;
+    display:grid;place-items:center;font-weight:900;font-size:13px;transition:.16s;margin-top:1px;
+  }
+  .opt:hover{transform:translateY(-2px);border-color:#F0B429;box-shadow:0 7px 16px rgba(51,38,26,.09)}
+  .opt:active{transform:translateY(1px)}
+  .opt.sel{border-color:#E4572E;background:#FFF5F0;box-shadow:0 5px 0 rgba(228,87,46,.16)}
+  .opt.sel .k{background:#E4572E;color:#fff;transform:rotate(-6deg)}
+
+  /* ---------- 结果 ---------- */
+  .res-hero{position:relative;display:grid;place-items:center;padding:12px 0 4px;margin-bottom:6px}
+  .res-blob{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:250px;height:250px;background:var(--tl);
+    border-radius:46% 54% 58% 42%/52% 44% 56% 48%;
+    animation:morph 9s ease-in-out infinite;
+  }
+  @keyframes morph{
+    0%,100%{border-radius:46% 54% 58% 42%/52% 44% 56% 48%;transform:translate(-50%,-50%) rotate(0deg)}
+    50%{border-radius:56% 44% 42% 58%/44% 56% 44% 56%;transform:translate(-50%,-50%) rotate(8deg)}
+  }
+  .res-avatar{position:relative;width:200px;height:200px;animation:bob 4s ease-in-out infinite}
+  .res-avatar svg{width:100%;height:100%;display:block;filter:drop-shadow(0 10px 14px rgba(51,38,26,.14))}
+  .res-stamp{
+    position:absolute;top:14px;right:6px;background:#fff;border:2.5px solid #33261A;border-radius:12px;
+    padding:6px 11px;font-size:11.5px;font-weight:900;letter-spacing:1.5px;color:var(--tc);
+    transform:rotate(8deg);box-shadow:3px 3px 0 rgba(51,38,26,.13);
+  }
+  .res-head{text-align:center;margin-bottom:22px}
+  .res-head h1{font-size:clamp(30px,7vw,40px);font-weight:900;margin:0 0 8px;letter-spacing:3px}
+  .epithet{font-size:13.5px;font-weight:800;color:var(--tc);letter-spacing:2px;margin:0 0 14px}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+  .tag{
+    background:#F7EDDC;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:800;color:#8A6A3A;
+  }
+  .tag-disc{background:var(--tc);color:#fff}
+
+  .bubble{
+    position:relative;background:#fff;border:2.5px solid #33261A;border-radius:18px;
+    padding:15px 18px;font-size:14.5px;font-weight:800;line-height:1.7;color:#5A4632;
+    text-align:center;margin:0 0 24px;box-shadow:4px 4px 0 rgba(51,38,26,.08);
+  }
+  .bubble::after{
+    content:"";position:absolute;top:-11px;left:50%;margin-left:-8px;
+    width:18px;height:18px;background:#fff;border-left:2.5px solid #33261A;border-top:2.5px solid #33261A;
+    transform:rotate(45deg);
+  }
+  .desc{font-size:15px;line-height:1.95;color:#5A4632;margin:0 0 26px;font-weight:500}
+
+  .sec-title{
+    display:flex;align-items:center;gap:10px;font-size:13px;font-weight:900;letter-spacing:2.5px;
+    color:#B08A54;margin:0 0 15px;
+  }
+  .sec-title::after{content:"";flex:1;height:2px;background:repeating-linear-gradient(90deg,#EADCC7 0 6px,transparent 6px 12px)}
+
+  /* DISC 条 */
+  .bars{display:grid;gap:13px;margin-bottom:28px}
+  .bar-row{display:grid;grid-template-columns:74px 1fr 44px;align-items:center;gap:11px}
+  .bar-name{font-size:12.5px;font-weight:800;color:#6B5A47}
+  .bar-name i{font-style:normal;color:#B49B7B;font-weight:900;margin-right:4px}
+  .bar-track{height:14px;background:#F4EADB;border-radius:999px;overflow:hidden}
+  .bar-fill{height:100%;width:0;border-radius:999px;transition:width .9s cubic-bezier(.2,.8,.3,1)}
+  .bar-val{font-size:12.5px;font-weight:900;color:#6B5A47;text-align:right;font-variant-numeric:tabular-nums}
+
+  /* 两栏 */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:26px}
+  .quad{border:2.5px solid #EDDFC8;border-radius:18px;padding:15px 16px;background:#fff}
+  .quad h4{margin:0 0 10px;font-size:13px;font-weight:900;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+  .quad.good h4{color:#2E8F86}
+  .quad.bad h4{color:#C2410C}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .good .dot{background:#35A79C}
+  .bad .dot{background:#E4572E}
+  .quad ul{margin:0;padding:0;list-style:none}
+  .quad li{font-size:13px;line-height:1.65;color:#6B5A47;font-weight:600;padding-left:13px;position:relative;margin-bottom:6px}
+  .quad li:last-child{margin-bottom:0}
+  .quad li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:#DCCBB0}
+
+  .partner{
+    display:flex;gap:14px;align-items:center;background:#fff;border:2.5px solid #33261A;
+    border-radius:20px;padding:11px 16px;margin-bottom:12px;box-shadow:4px 4px 0 rgba(51,38,26,.08);
+  }
+  .partner-face{flex:0 0 62px;width:62px;height:62px;border-radius:16px;background:#FFF3DF;display:grid;place-items:center;overflow:hidden}
+  .partner-face svg{width:106%;height:106%}
+  .partner-txt{font-size:13px;line-height:1.65;color:#6B5A47;font-weight:600;margin:0}
+  .partner-txt b{display:block;font-size:14.5px;color:#33261A;font-weight:900;margin-bottom:3px}
+
+  .advice{
+    background:linear-gradient(135deg,#FFF6E4,#FFEDE4);border:2.5px dashed #E3C79B;
+    border-radius:18px;padding:16px 18px;font-size:13.5px;line-height:1.75;color:#7A5C36;font-weight:600;
+    margin-bottom:28px;
+  }
+  .advice b{color:#C2410C;font-weight:900}
+
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:30px}
+  .g-item{
+    background:#fff;border:2.5px solid #EDDFC8;border-radius:16px;padding:7px 4px 11px;text-align:center;
+    opacity:.62;transition:.2s;
+  }
+  .g-item.on{opacity:1;border-color:#33261A;box-shadow:4px 4px 0 rgba(51,38,26,.1);transform:translateY(-2px)}
+  .g-face{width:100%;aspect-ratio:1/1;border-radius:12px;background:var(--tl);display:grid;place-items:center;overflow:hidden;margin-bottom:6px}
+  .g-face svg{width:104%;height:104%}
+  .g-item b{display:block;font-size:12px;font-weight:800}
+  .g-item span{display:block;font-size:9.5px;color:#A08E78;font-weight:800;margin-top:2px;letter-spacing:.5px}
+
+  .actions{display:flex;gap:11px}
+  .actions + .actions{margin-top:11px}
+  .btn-ghost,.btn-solid{
+    flex:1;border-radius:18px;padding:15px 10px;font-size:15px;font-weight:900;font-family:inherit;
+    cursor:pointer;letter-spacing:1px;transition:transform .13s ease,box-shadow .13s ease;border:2.5px solid #33261A;
+  }
+  .btn-solid{background:#E4572E;color:#fff;box-shadow:0 6px 0 #A83A19}
+  .btn-solid:active{transform:translateY(4px);box-shadow:0 2px 0 #A83A19}
+  .btn-ghost{background:#fff;color:#33261A;box-shadow:0 6px 0 rgba(51,38,26,.14)}
+  .btn-ghost:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(51,38,26,.14)}
+  .btn-solid:disabled{opacity:.65;cursor:wait}
+
+  /* 载入遮罩 */
+  .loading{
+    position:fixed;inset:0;z-index:50;display:none;place-items:center;align-content:center;
+    background:rgba(255,248,236,.94);backdrop-filter:blur(6px);text-align:center;
+  }
+  .loading.on{display:grid;animation:rise .3s ease both}
+  .cloudspin{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 18px;
+    border:5px solid #F0DFC4;border-top-color:#E4572E;animation:spin .85s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loading p{font-size:14px;font-weight:800;color:#9A8468;letter-spacing:1px;margin:0}
+
+  /* 彩带 */
+  #confetti{position:fixed;inset:0;z-index:40;pointer-events:none;overflow:hidden}
+  #confetti i{position:absolute;top:-16px;width:9px;height:14px;border-radius:3px;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(108vh) rotate(560deg);opacity:.15}}
+
+  /* 小屏 */
+  @media (max-width:480px){
+    .wrap{padding:26px 15px 64px}
+    .panel{padding:22px 17px 22px;border-radius:24px;box-shadow:6px 7px 0 rgba(51,38,26,.09)}
+    .btn-primary{padding:16px 30px;font-size:16px;width:100%}
+    .duo{grid-template-columns:1fr}
+    .res-avatar{width:170px;height:170px}
+    .res-blob{width:214px;height:214px}
+    .bar-row{grid-template-columns:64px 1fr 40px;gap:8px}
+  }
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true">
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="star s1"></div>
+  <div class="star s2"></div>
+  <div class="star s3"></div>
+</div>
+<div id="confetti" aria-hidden="true"></div>
+
+<div class="loading" id="loading">
+  <div>
+    <div class="cloudspin"></div>
+    <p>正在翻看你的十万八千里…</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- ================= 首页 ================= -->
+  <section class="screen active" id="s-intro">
+    <div class="hero">
+      <span class="pill">DISC × 西游记</span>
+      <h1>你是取经队伍里的<span class="hl">谁</span>？</h1>
+      <p class="lede">12 道工作与生活场景题，4 种性格。<br>看看你身上，住着哪位取经人。</p>
+      <div class="cast" id="castRow"></div>
+      <button class="btn-primary" id="startBtn">开始测试 · 共 12 题</button>
+      <p class="hint">凭第一反应选，别想太久 · 约 2 分钟</p>
+    </div>
+  </section>
+
+  <!-- ================= 答题 ================= -->
+  <section class="screen" id="s-quiz">
+    <div class="panel">
+      <div class="quiz-top">
+        <button class="nav-btn" id="backBtn" title="上一题">←</button>
+        <div class="prog"><div class="prog-fill" id="progFill"></div></div>
+        <div class="count"><b id="qnow">1</b>/12</div>
+      </div>
+      <div class="qindex">Q<span id="qnum">01</span></div>
+      <h2 class="qtitle" id="qtext"></h2>
+      <div class="opts" id="opts"></div>
+    </div>
+  </section>
+
+  <!-- ================= 结果 ================= -->
+  <section class="screen" id="s-result">
+    <div class="panel" id="resultRoot"></div>
+  </section>
+
+</main>
+
+<script>
+/* =========================================================
+   角色插画 · 第二版（Q 版全身 + 手持道具，手绘 SVG）
+   ========================================================= */
+const ART = {
+  /* 唐僧 —— C 谨慎型 · 锡杖 */
+  C: `<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="120" cy="228" rx="42" ry="6" fill="#33261A" opacity=".1"/>
+  <ellipse cx="107" cy="214" rx="13" ry="7" fill="#6B4A32" stroke="#33261A" stroke-width="5"/>
+  <ellipse cx="133" cy="214" rx="13" ry="7" fill="#6B4A32" stroke="#33261A" stroke-width="5"/>
+  <path d="M84 152q36-10 72 0l9 56q-45 9-90 0z" fill="#D9543F" stroke="#33261A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M107 148l13 34 13-34q-13-5-26 0z" fill="#F6D68A" stroke="#33261A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M81 183q39 12 78 0" fill="none" stroke="#F0B429" stroke-width="9" stroke-linecap="round"/>
+  <path d="M88 158q-12 16-14 30" fill="none" stroke="#33261A" stroke-width="20" stroke-linecap="round"/>
+  <path d="M88 158q-12 16-14 30" fill="none" stroke="#D9543F" stroke-width="13" stroke-linecap="round"/>
+  <path d="M152 158q13 14 20 26" fill="none" stroke="#33261A" stroke-width="20" stroke-linecap="round"/>
+  <path d="M152 158q13 14 20 26" fill="none" stroke="#D9543F" stroke-width="13" stroke-linecap="round"/>
+  <rect x="183" y="92" width="7" height="128" rx="3.5" fill="#C98B3C" stroke="#33261A" stroke-width="4"/>
+  <circle cx="186.5" cy="80" r="11" fill="none" stroke="#33261A" stroke-width="8"/>
+  <circle cx="186.5" cy="80" r="11" fill="none" stroke="#F0B429" stroke-width="4"/>
+  <circle cx="175" cy="96" r="6" fill="none" stroke="#33261A" stroke-width="6"/>
+  <circle cx="175" cy="96" r="6" fill="none" stroke="#F0B429" stroke-width="2.5"/>
+  <circle cx="198" cy="96" r="6" fill="none" stroke="#33261A" stroke-width="6"/>
+  <circle cx="198" cy="96" r="6" fill="none" stroke="#F0B429" stroke-width="2.5"/>
+  <circle cx="76" cy="190" r="8.5" fill="#F2C9A0" stroke="#33261A" stroke-width="5"/>
+  <circle cx="173" cy="186" r="8.5" fill="#F2C9A0" stroke="#33261A" stroke-width="5"/>
+  <circle cx="120" cy="96" r="52" fill="#FFD9B8" stroke="#33261A" stroke-width="6"/>
+  <circle cx="68" cy="100" r="11" fill="#FFD9B8" stroke="#33261A" stroke-width="6"/>
+  <circle cx="172" cy="100" r="11" fill="#FFD9B8" stroke="#33261A" stroke-width="6"/>
+  <path d="M70 68q50-24 100 0l-2 14q-48-21-96 0z" fill="#F0B429" stroke="#33261A" stroke-width="6" stroke-linejoin="round"/>
+  <circle cx="120" cy="62" r="8" fill="#FFF0BE" stroke="#33261A" stroke-width="4.5"/>
+  <path d="M88 88q12-7 23-2" fill="none" stroke="#33261A" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M152 88q-12-7-23-2" fill="none" stroke="#33261A" stroke-width="4.5" stroke-linecap="round"/>
+  <ellipse cx="100" cy="105" rx="7.5" ry="9.5" fill="#33261A"/>
+  <ellipse cx="140" cy="105" rx="7.5" ry="9.5" fill="#33261A"/>
+  <circle cx="102" cy="101" r="2.8" fill="#fff"/>
+  <circle cx="142" cy="101" r="2.8" fill="#fff"/>
+  <ellipse cx="84" cy="118" rx="8" ry="5.5" fill="#FF9E8C" opacity=".8"/>
+  <ellipse cx="156" cy="118" rx="8" ry="5.5" fill="#FF9E8C" opacity=".8"/>
+  <path d="M112 124q8 8 16 0" fill="none" stroke="#33261A" stroke-width="4.5" stroke-linecap="round"/>
+</svg>`,
+
+  /* 孙悟空 —— D 支配型 · 金箍棒 */
+  D: `<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="120" cy="228" rx="42" ry="6" fill="#33261A" opacity=".1"/>
+  <rect x="183" y="66" width="9" height="156" rx="4.5" fill="#E4572E" stroke="#33261A" stroke-width="4.5"/>
+  <circle cx="187.5" cy="70" r="9" fill="#F0B429" stroke="#33261A" stroke-width="4.5"/>
+  <circle cx="187.5" cy="214" r="9" fill="#F0B429" stroke="#33261A" stroke-width="4.5"/>
+  <ellipse cx="107" cy="214" rx="13" ry="7" fill="#6B4A32" stroke="#33261A" stroke-width="5"/>
+  <ellipse cx="133" cy="214" rx="13" ry="7" fill="#6B4A32" stroke="#33261A" stroke-width="5"/>
+  <path d="M84 152q36-10 72 0l9 56q-45 9-90 0z" fill="#F7C948" stroke="#33261A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M82 176q38 14 76 0l3 16q-41 12-82 0z" fill="#E4572E" stroke="#33261A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M88 158q-12 16-14 30" fill="none" stroke="#33261A" stroke-width="20" stroke-linecap="round"/>
+  <path d="M88 158q-12 16-14 30" fill="none" stroke="#F7C948" stroke-width="13" stroke-linecap="round"/>
+  <path d="M152 158q13 14 20 26" fill="none" stroke="#33261A" stroke-width="20" stroke-linecap="round"/>
+  <path d="M152 158q13 14 20 26" fill="none" stroke="#F7C948" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="76" cy="190" r="8.5" fill="#E0A86B" stroke="#33261A" stroke-width="5"/>
+  <circle cx="174" cy="186" r="8.5" fill="#E0A86B" stroke="#33261A" stroke-width="5"/>
+  <circle cx="64" cy="98" r="16" fill="#E0A86B" stroke="#33261A" stroke-width="6"/>
+  <circle cx="64" cy="98" r="6" fill="#F7CFA4"/>
+  <circle cx="176" cy="98" r="16" fill="#E0A86B" stroke="#33261A" stroke-width="6"/>
+  <circle cx="176" cy="98" r="6" fill="#F7CFA4"/>
+  <circle cx="120" cy="96" r="52" fill="#E0A86B" stroke="#33261A" stroke-width="6"/>
+  <path d="M103 48l6-14 8 14z" fill="#E0A86B" stroke="#33261A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M121 48l8-14 6 14z" fill="#E0A86B" stroke="#33261A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M70 84Q120 60 170 84" fill="none" stroke="#33261A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M70 84Q120 60 170 84" fill="none" stroke="#F0B429" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="120" cy="70" r="7" fill="#FFE9A8" stroke="#33261A" stroke-width="4"/>
+  <ellipse cx="120" cy="118" rx="31" ry="23" fill="#F9DCB6" stroke="#33261A" stroke-width="5.5"/>
+  <path d="M112 110q8-5 16 0" fill="none" stroke="#33261A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M108 124q12 12 24 0" fill="none" stroke="#33261A" stroke-width="4.5" stroke-linecap="round"/>
+  <ellipse cx="97" cy="94" rx="8.5" ry="10" fill="#fff" stroke="#33261A" stroke-width="4.5"/>
+  <circle cx="99" cy="96" r="5" fill="#33261A"/>
+  <circle cx="101" cy="93" r="1.9" fill="#fff"/>
+  <ellipse cx="143" cy="94" rx="8.5" ry="10" fill="#fff" stroke="#33261A" stroke-width="4.5"/>
+  <circle cx="145" cy="96" r="5" fill="#33261A"/>
+  <circle cx="147" cy="93" r="1.9" fill="#fff"/>
+  <path d="M84 84l22 6" stroke="#33261A" stroke-width="5.5" stroke-linecap="round"/>
+  <path d="M156 84l-22 6" stroke="#33261A" stroke-width="5.5" stroke-linecap="round"/>
+</svg>`,
+
+  /* 猪八戒 —— I 影响型 · 九齿钉耙 */
+  I: `<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="120" cy="228" rx="42" ry="6" fill="#33261A" opacity=".1"/>
+  <rect x="182" y="106" width="9" height="112" rx="4.5" fill="#8B5E3C" stroke="#33261A" stroke-width="4.5"/>
+  <path d="M166 108h44" stroke="#33261A" stroke-width="10" stroke-linecap="round"/>
+  <path d="M166 108h44" stroke="#9AA6B5" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M169 108V86M183 108V83M197 108V86" stroke="#33261A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M169 108V86M183 108V83M197 108V86" stroke="#9AA6B5" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="107" cy="214" rx="13" ry="7" fill="#6B4A32" stroke="#33261A" stroke-width="5"/>
+  <ellipse cx="133" cy="214" rx="13" ry="7" fill="#6B4A32" stroke="#33261A" stroke-width="5"/>
+  <path d="M84 152q36-10 72 0l9 56q-45 9-90 0z" fill="#6E8FC7" stroke="#33261A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M82 182q38 12 76 0" fill="none" stroke="#F0B429" stroke-width="9" stroke-linecap="round"/>
+  <path d="M88 158q-12 16-14 30" fill="none" stroke="#33261A" stroke-width="20" stroke-linecap="round"/>
+  <path d="M88 158q-12 16-14 30" fill="none" stroke="#6E8FC7" stroke-width="13" stroke-linecap="round"/>
+  <path d="M152 158q13 16 21 28" fill="none" stroke="#33261A" stroke-width="20" stroke-linecap="round"/>
+  <path d="M152 158q13 16 21 28" fill="none" stroke="#6E8FC7" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="76" cy="190" r="8.5" fill="#FFC6D2" stroke="#33261A" stroke-width="5"/>
+  <circle cx="175" cy="188" r="8.5" fill="#FFC6D2" stroke="#33261A" stroke-width="5"/>
+  <path d="M86 62C68 34 42 46 50 73c5 16 22 18 36 8z" fill="#FFC6D2" stroke="#33261A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M154 62c18-28 44-16 36 11-5 16-22 18-36 8z" fill="#FFC6D2" stroke="#33261A" stroke-width="6" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="98" rx="53" ry="50" fill="#FFC6D2" stroke="#33261A" stroke-width="6"/>
+  <ellipse cx="120" cy="120" rx="25" ry="18" fill="#FF9FB6" stroke="#33261A" stroke-width="5.5"/>
+  <ellipse cx="112" cy="120" rx="4" ry="5.5" fill="#B5556F"/>
+  <ellipse cx="128" cy="120" rx="4" ry="5.5" fill="#B5556F"/>
+  <circle cx="98" cy="92" r="6" fill="#33261A"/>
+  <circle cx="142" cy="92" r="6" fill="#33261A"/>
+  <circle cx="100" cy="90" r="2.2" fill="#fff"/>
+  <circle cx="144" cy="90" r="2.2" fill="#fff"/>
+  <path d="M87 78q9-6 18-2" fill="none" stroke="#33261A" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M153 78q-9-6-18-2" fill="none" stroke="#33261A" stroke-width="4.5" stroke-linecap="round"/>
+  <ellipse cx="76" cy="110" rx="7.5" ry="5" fill="#FF7E9E" opacity=".5"/>
+  <ellipse cx="164" cy="110" rx="7.5" ry="5" fill="#FF7E9E" opacity=".5"/>
+  <path d="M112 146q8 6 16 0" fill="none" stroke="#33261A" stroke-width="4" stroke-linecap="round"/>
+</svg>`,
+
+  /* 沙和尚 —— S 稳健型 · 降妖宝杖 */
+  S: `<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="120" cy="228" rx="42" ry="6" fill="#33261A" opacity=".1"/>
+  <rect x="183" y="70" width="8" height="152" rx="4" fill="#8B5E3C" stroke="#33261A" stroke-width="4.5"/>
+  <path d="M187 70c-14-10-16-24-6-32 6 10 10 16 6 32z" fill="#B9C6D6" stroke="#33261A" stroke-width="4.5" stroke-linejoin="round"/>
+  <ellipse cx="107" cy="214" rx="13" ry="7" fill="#6B4A32" stroke="#33261A" stroke-width="5"/>
+  <ellipse cx="133" cy="214" rx="13" ry="7" fill="#6B4A32" stroke="#33261A" stroke-width="5"/>
+  <path d="M84 152q36-10 72 0l9 56q-45 9-90 0z" fill="#7C6BD6" stroke="#33261A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M86 152l14 34 20-24 20 24 14-34z" fill="none" stroke="#B9A7F5" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M88 158q-12 16-14 30" fill="none" stroke="#33261A" stroke-width="20" stroke-linecap="round"/>
+  <path d="M88 158q-12 16-14 30" fill="none" stroke="#7C6BD6" stroke-width="13" stroke-linecap="round"/>
+  <path d="M152 158q13 14 20 26" fill="none" stroke="#33261A" stroke-width="20" stroke-linecap="round"/>
+  <path d="M152 158q13 14 20 26" fill="none" stroke="#7C6BD6" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="76" cy="190" r="8.5" fill="#D9A06B" stroke="#33261A" stroke-width="5"/>
+  <circle cx="174" cy="186" r="8.5" fill="#D9A06B" stroke="#33261A" stroke-width="5"/>
+  <circle cx="66" cy="100" r="11" fill="#D9A06B" stroke="#33261A" stroke-width="6"/>
+  <circle cx="174" cy="100" r="11" fill="#D9A06B" stroke="#33261A" stroke-width="6"/>
+  <circle cx="120" cy="96" r="52" fill="#D9A06B" stroke="#33261A" stroke-width="6"/>
+  <path d="M70 100c-3 30 18 46 50 46s53-16 50-46c-8 24-26 32-50 32s-42-8-50-32z" fill="#4A3728" stroke="#33261A" stroke-width="5.5" stroke-linejoin="round"/>
+  <path d="M86 84l21 5" stroke="#33261A" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M154 84l-21 5" stroke="#33261A" stroke-width="6.5" stroke-linecap="round"/>
+  <ellipse cx="99" cy="99" rx="6" ry="7.5" fill="#33261A"/>
+  <ellipse cx="141" cy="99" rx="6" ry="7.5" fill="#33261A"/>
+  <circle cx="101" cy="96" r="2.2" fill="#fff"/>
+  <circle cx="143" cy="96" r="2.2" fill="#fff"/>
+  <path d="M114 112q6 6 12 0" fill="none" stroke="#33261A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M110 126q10 7 20 0" fill="none" stroke="#33261A" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M86 166q34 20 68 0" fill="none" stroke="#33261A" stroke-width="16" stroke-linecap="round" stroke-dasharray="0.1 17"/>
+  <path d="M86 166q34 20 68 0" fill="none" stroke="#8B3A2E" stroke-width="11" stroke-linecap="round" stroke-dasharray="0.1 17"/>
+</svg>`
+};
+
+/* =========================================================
+   人格数据（工作 / 生活视角）
+   ========================================================= */
+const TYPES = {
+  D: {
+    key:'D', name:'孙悟空', epithet:'齐天大圣 · 破局者',
+    disc:'D 支配型 · 行动派', short:'敢冲敢闯',
+    color:'#E9A23B', light:'#FFF0D2',
+    keywords:['执行力强','敢拍板','要结果','不服输'],
+    quote:'“俺老孙去去就来！”',
+    desc:'任务一下来，你已经冲出去了。工作里你是那个“这事儿我来”的人：讨厌磨叽和空谈，看到问题就想直接解决，越是没人敢碰的硬骨头越来劲。',
+    good:['执行力爆表，说干就干','敢拍板，关键时刻顶得上','抗压强，越有挑战越兴奋','目标感强，不绕弯子'],
+    bad:['急性子，容易把团队带得紧绷','不爱走流程，觉得是束缚','冲得太快，有时忽略队友节奏'],
+    partner:'S', partnerName:'沙和尚',
+    partnerWhy:'你负责开路，他负责收尾。你把“不可能”干成“可能”，他保证事情真正落地、不返工。',
+    advice:'冲刺之前多问一句“还有谁没跟上”。你的速度，天生就是团队的速度。'
+  },
+  I: {
+    key:'I', name:'猪八戒', epithet:'天蓬元帅 · 气氛担当',
+    disc:'I 影响型 · 表达派', short:'会玩会聊',
+    color:'#F272A0', light:'#FFE4EE',
+    keywords:['人缘好','乐观','会来事','共情强'],
+    quote:'“师父放心，有俺老猪在呢！”',
+    desc:'你是办公室里的气氛担当。再枯燥的活儿你也能聊出花来，再僵的会你一句玩笑就能救场。人缘是你的超能力，热闹是你的安全感。',
+    good:['亲和力强，谁都能聊到一起','乐观，再难的局面也不丧','会表达，能把人心拢在一起','反应快，临场从不怯场'],
+    bad:['容易分心，三分钟热度','怕枯燥，重复的活儿提不起劲','话说得满，有时落地跟不上'],
+    partner:'C', partnerName:'唐僧',
+    partnerWhy:'你负责让团队有人气，他负责让大家有方向。你的热闹需要有人兜住，他的坚持需要有人点亮。',
+    advice:'每天先做完“最难的那件事”再开聊。你的能量一旦聚焦，成果会吓到你自己。'
+  },
+  S: {
+    key:'S', name:'沙和尚', epithet:'卷帘大将 · 定海神针',
+    disc:'S 稳健型 · 支持派', short:'稳得住',
+    color:'#35A79C', light:'#DFF4F1',
+    keywords:['可靠','耐心','忠诚','情绪稳定'],
+    quote:'“大师兄，师父被妖怪抓走了……”',
+    desc:'你不抢功，也不抢话。交到手上的事，一件件都稳稳落地。项目乱了、人心慌了，你往往是那个“还在”的人，是团队真正的压舱石。',
+    good:['靠谱，交给你的事从不掉链子','情绪稳，是团队的定心丸','有耐心，扛得住重复和漫长','愿意补位，总先想着别人'],
+    bad:['不擅拒绝，活越揽越多','容易被忽视，功劳常被略过','变化太猛时，容易先慌半拍'],
+    partner:'D', partnerName:'孙悟空',
+    partnerWhy:'他敢冲，你能守。他负责打碎难关，你负责把碎片收拾成一条能走的路。',
+    advice:'偶尔把“我没事”换成“我需要帮忙”。你的付出值得被看见，也值得被分担。'
+  },
+  C: {
+    key:'C', name:'唐僧', epithet:'金蝉子 · 定盘星',
+    disc:'C 谨慎型 · 思虑派', short:'想得周全',
+    color:'#D9543F', light:'#FFE6DF',
+    keywords:['严谨','有原则','善规划','专注'],
+    quote:'“贫僧自东土大唐而来，去往西天拜佛求经。”',
+    desc:'你想得比别人细，也看得比别人远。别人眼里的“想太多”，其实是你在替所有人把风险先过了一遍。方向一旦定了，你比谁都坚定。',
+    good:['想得周全，很少踩大坑','有原则，底线清晰','擅长规划，能把大目标拆成小步','极度专注，认准就不回头'],
+    bad:['容易卡在准备阶段，迟迟不开工','标准高，对自己和别人都苛刻','细节焦虑，常自我怀疑'],
+    partner:'I', partnerName:'猪八戒',
+    partnerWhy:'你负责方向，他负责松弛。一个把路走对，一个让路上的人还笑得出来。',
+    advice:'允许自己“先做到六十分”，剩下的四十分路上再补。完成，永远比完美更接近终点。'
+  }
+};
+
+const BAR = {
+  D:{label:'支配', color:'#E9A23B'},
+  I:{label:'影响', color:'#F272A0'},
+  S:{label:'稳健', color:'#35A79C'},
+  C:{label:'谨慎', color:'#D9543F'}
+};
+
+/* =========================================================
+   12 道题 · 工作 / 生活场景
+   ========================================================= */
+const QUESTIONS = [
+  { q:'周一早上坐到工位，打开电脑后你先做什么？',
+    opts:[
+      {t:'D', text:'直奔本周最难的那件事，先啃硬骨头'},
+      {t:'I', text:'先在群里冒个泡，跟大家聊两句再开工'},
+      {t:'S', text:'接着做昨天没做完的，按部就班往前推'},
+      {t:'C', text:'先列清单，把优先级和风险排一遍'}
+    ]},
+  { q:'开会时，有人讲的方案明显有漏洞，你会？',
+    opts:[
+      {t:'D', text:'当场打断，直接指出哪里不行'},
+      {t:'I', text:'先夸他亮点，再拐个弯提意见'},
+      {t:'S', text:'会后私下说，别让人下不来台'},
+      {t:'C', text:'等他讲完，把数据和逻辑摆出来对一遍'}
+    ]},
+  { q:'手头正忙，领导突然塞来一个临时任务，你？',
+    opts:[
+      {t:'D', text:'先接下来，边干边想办法'},
+      {t:'I', text:'拉个群，叫上几个伙伴一起搞'},
+      {t:'S', text:'把手上的事重排一遍，尽量不耽误任何人'},
+      {t:'C', text:'先问清目标、范围和验收标准再动手'}
+    ]},
+  { q:'周末突然空出完整两天，你更想？',
+    opts:[
+      {t:'D', text:'去挑战一件没做过的事，比如徒步越野'},
+      {t:'I', text:'约朋友吃饭唱歌，热闹一场'},
+      {t:'S', text:'在家做顿饭，睡到自然醒'},
+      {t:'C', text:'把一直想学的东西，系统地学一遍'}
+    ]},
+  { q:'你的工位（或房间）通常是什么样的？',
+    opts:[
+      {t:'D', text:'看着乱，但我要的东西一秒就能找到'},
+      {t:'I', text:'贴满照片和小玩意儿，一看就热闹'},
+      {t:'S', text:'整齐，每样东西都有固定的位置'},
+      {t:'C', text:'分类清楚，连数据线都缠得整整齐齐'}
+    ]},
+  { q:'年底团队评优秀，你心里更在意的是？',
+    opts:[
+      {t:'D', text:'我的贡献被真正看见'},
+      {t:'I', text:'这一年大家处得开心，气氛好'},
+      {t:'S', text:'团队别散，明年还能一起干'},
+      {t:'C', text:'事情做得漂亮，经得起复盘'}
+    ]},
+  { q:'朋友深夜找你倾诉烦恼，你的第一反应是？',
+    opts:[
+      {t:'D', text:'直接给方案：“那就去解决啊”'},
+      {t:'I', text:'先陪他吐槽，把情绪接住'},
+      {t:'S', text:'安静听着，他需要时再开口'},
+      {t:'C', text:'帮他一层层理清，问题到底出在哪'}
+    ]},
+  { q:'面对一堆规则和流程，你的态度是？',
+    opts:[
+      {t:'D', text:'能绕就绕，结果最重要'},
+      {t:'I', text:'看情况，别太死板就行'},
+      {t:'S', text:'按流程走，心里踏实'},
+      {t:'C', text:'不合理的地方，我会提出来改'}
+    ]},
+  { q:'负责的项目突然出了岔子，你最先做的是？',
+    opts:[
+      {t:'D', text:'先止损，把窟窿堵上再说'},
+      {t:'I', text:'先安抚大家，别慌了阵脚'},
+      {t:'S', text:'先确认每个人都没事，再补进度'},
+      {t:'C', text:'先复盘原因，避免再犯第二次'}
+    ]},
+  { q:'别人夸你的时候，你最想听到哪句？',
+    opts:[
+      {t:'D', text:'“这事没你真办不成”'},
+      {t:'I', text:'“跟你在一起特别开心”'},
+      {t:'S', text:'“交给你我一直很放心”'},
+      {t:'C', text:'“你想得比我们都细”'}
+    ]},
+  { q:'计划赶不上变化、安排全被打乱时，你？',
+    opts:[
+      {t:'D', text:'正好，我本来就嫌计划太慢'},
+      {t:'I', text:'那就换个玩法，说不定更有意思'},
+      {t:'S', text:'有点烦，但会慢慢调整过来'},
+      {t:'C', text:'心里发紧，得赶紧重排一遍'}
+    ]},
+  { q:'用一个字概括你的做事风格？',
+    opts:[
+      {t:'D', text:'冲'},
+      {t:'I', text:'活'},
+      {t:'S', text:'稳'},
+      {t:'C', text:'精'}
+    ]}
+];
+
+/* =========================================================
+   逻辑
+   ========================================================= */
+const $ = s => document.querySelector(s);
+const ORDER = ['D','I','S','C'];
+const LETTER = ['A','B','C','D'];
+let state = { order:[], answers:[], i:0 };
+let lastResult = null;
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+  $('#'+id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+/* 首页角色墙 */
+function buildCast(){
+  $('#castRow').innerHTML = ORDER.map(k=>{
+    const t = TYPES[k];
+    return `<div class="cast-item" style="--tc:${t.color};--tl:${t.light}">
+      <div class="cast-face">${ART[k]}</div>
+      <b>${t.name}</b>
+      <span>${k} · ${BAR[k].label}</span>
+    </div>`;
+  }).join('');
+}
+
+function startQuiz(){
+  state.order = QUESTIONS.map(q => shuffle(q.opts));
+  state.answers = new Array(QUESTIONS.length).fill(null);
+  state.i = 0;
+  show('s-quiz');
+  renderQ();
+}
+
+function renderQ(){
+  const i = state.i;
+  $('#qnow').textContent = i+1;
+  $('#qnum').textContent = String(i+1).padStart(2,'0');
+  $('#progFill').style.width = (i/QUESTIONS.length*100) + '%';
+  $('#backBtn').disabled = i === 0;
+
+  const title = $('#qtext');
+  title.textContent = QUESTIONS[i].q;
+  title.classList.remove('fade');
+  void title.offsetWidth;
+  title.classList.add('fade');
+
+  const picked = state.answers[i];
+  $('#opts').innerHTML = state.order[i].map((o,n)=>{
+    const sel = picked === o.t ? ' sel' : '';
+    return `<button class="opt${sel}" data-t="${o.t}">
+      <span class="k">${LETTER[n]}</span><span>${o.text}</span>
+    </button>`;
+  }).join('');
+
+  $('#opts').querySelectorAll('.opt').forEach(btn=>{
+    btn.addEventListener('click', ()=> choose(btn.dataset.t, btn));
+  });
+}
+
+function choose(t, btn){
+  const i = state.i;
+  state.answers[i] = t;
+  $('#opts').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+
+  setTimeout(()=>{
+    if(i < QUESTIONS.length-1){
+      state.i++;
+      renderQ();
+    }else{
+      finish();
+    }
+  }, 240);
+}
+
+function finish(){
+  $('#progFill').style.width = '100%';
+  $('#loading').classList.add('on');
+  setTimeout(()=>{
+    $('#loading').classList.remove('on');
+    compute();
+    show('s-result');
+    confetti();
+  }, 900);
+}
+
+function compute(){
+  const counts = {D:0,I:0,S:0,C:0};
+  state.answers.forEach(a => { if(a) counts[a]++; });
+
+  const max = Math.max(...ORDER.map(k=>counts[k]));
+  const tied = ORDER.filter(k => counts[k] === max);
+  const winner = tied[0];
+  lastResult = { winner, counts, tie: tied.length > 1, tied };
+  renderResult();
+}
+
+function renderResult(){
+  const { winner, counts, tie, tied } = lastResult;
+  const t = TYPES[winner];
+  const pct = k => Math.round(counts[k] / QUESTIONS.length * 100);
+  const tiedNames = tied.map(k=>TYPES[k].name).join('与');
+
+  const bars = ORDER.map(k => `
+    <div class="bar-row">
+      <span class="bar-name"><i>${k}</i>${BAR[k].label}</span>
+      <div class="bar-track"><div class="bar-fill" data-w="${pct(k)}" style="background:${BAR[k].color}"></div></div>
+      <span class="bar-val">${pct(k)}%</span>
+    </div>`).join('');
+
+  const gallery = ORDER.map(k => {
+    const g = TYPES[k];
+    return `<div class="g-item${k===winner?' on':''}" style="--tl:${g.light}">
+      <div class="g-face">${ART[k]}</div>
+      <b>${g.name}</b>
+      <span>${k} · ${BAR[k].label}</span>
+    </div>`;
+  }).join('');
+
+  $('#resultRoot').innerHTML = `
+    <div style="--tc:${t.color};--tl:${t.light}">
+      <div class="res-hero">
+        <div class="res-blob"></div>
+        <div class="res-avatar">${ART[winner]}</div>
+        <div class="res-stamp">你的取经人格</div>
+      </div>
+
+      <div class="res-head">
+        <h1>${t.name}</h1>
+        <p class="epithet">${t.epithet}</p>
+        <div class="tags">
+          <span class="tag tag-disc">DISC · ${t.disc.split(' ')[0]} ${t.disc.split(' ')[1]}</span>
+          ${t.keywords.map(k=>`<span class="tag">${k}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="bubble">${t.quote}</div>
+
+      <p class="desc">${t.desc}</p>
+
+      ${tie ? `<div class="advice" style="margin-bottom:22px">你还挺难归类：<b>${tiedNames}</b> 的分数并列。上面展示的是更靠前的那一面，但你身上确实住着不止一位取经人。</div>` : ''}
+
+      <h3 class="sec-title">你的 DISC 能量</h3>
+      <div class="bars">${bars}</div>
+
+      <div class="duo">
+        <div class="quad good">
+          <h4><span class="dot"></span>你的天赋</h4>
+          <ul>${t.good.map(x=>`<li>${x}</li>`).join('')}</ul>
+        </div>
+        <div class="quad bad">
+          <h4><span class="dot"></span>值得留意</h4>
+          <ul>${t.bad.map(x=>`<li>${x}</li>`).join('')}</ul>
+        </div>
+      </div>
+
+      <h3 class="sec-title">最佳工作搭档</h3>
+      <div class="partner">
+        <div class="partner-face">${ART[t.partner]}</div>
+        <p class="partner-txt"><b>${t.partnerName}</b>${t.partnerWhy}</p>
+      </div>
+
+      <div class="advice"><b>一句成长建议 · </b>${t.advice}</div>
+
+      <h3 class="sec-title">取经四人组</h3>
+      <div class="gallery">${gallery}</div>
+
+      <div class="actions">
+        <button class="btn-solid" id="saveBtn">保存结果为图片</button>
+      </div>
+      <div class="actions">
+        <button class="btn-ghost" id="againBtn">再测一次</button>
+        <button class="btn-ghost" id="homeBtn">回到首页</button>
+      </div>
+    </div>
+  `;
+
+  // 进度条动画
+  requestAnimationFrame(()=>{
+    setTimeout(()=>{
+      document.querySelectorAll('.bar-fill').forEach(el=>{
+        el.style.width = el.dataset.w + '%';
+      });
+    }, 260);
+  });
+
+  $('#saveBtn').addEventListener('click', saveResultImage);
+  $('#againBtn').addEventListener('click', startQuiz);
+  $('#homeBtn').addEventListener('click', ()=>{ show('s-intro'); });
+}
+
+function confetti(){
+  const box = $('#confetti');
+  box.innerHTML = '';
+  const colors = ['#E9A23B','#F272A0','#35A79C','#D9543F','#FFD166','#7C6BD6'];
+  for(let i=0;i<22;i++){
+    const d = document.createElement('i');
+    d.style.left = (Math.random()*100) + '%';
+    d.style.background = colors[i % colors.length];
+    d.style.animationDelay = (Math.random()*0.7).toFixed(2) + 's';
+    d.style.animationDuration = (1.7 + Math.random()*1.5).toFixed(2) + 's';
+    d.style.width = (6 + Math.random()*6).toFixed(0) + 'px';
+    box.appendChild(d);
+  }
+  setTimeout(()=>{ box.innerHTML = ''; }, 3600);
+}
+
+/* =========================================================
+   保存结果为图片（Canvas 绘制分享海报）
+   ========================================================= */
+function svgToImg(svg){
+  return new Promise((resolve, reject)=>{
+    const img = new Image();
+    img.onload = ()=> resolve(img);
+    img.onerror = reject;
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  });
+}
+
+function rr(g, x, y, w, h, r){
+  g.beginPath();
+  g.moveTo(x+r, y);
+  g.arcTo(x+w, y, x+w, y+h, r);
+  g.arcTo(x+w, y+h, x, y+h, r);
+  g.arcTo(x, y+h, x, y, r);
+  g.arcTo(x, y, x+w, y, r);
+  g.closePath();
+}
+
+function blobPath(g, cx, cy, r){
+  g.beginPath();
+  g.moveTo(cx + r*0.46, cy - r);
+  g.bezierCurveTo(cx + r*1.05, cy - r*0.9, cx + r*1.05, cy + r*0.55, cx + r*0.45, cy + r);
+  g.bezierCurveTo(cx - r*0.2, cy + r*1.15, cx - r*1.0, cy + r*0.6, cx - r*0.95, cy - r*0.15);
+  g.bezierCurveTo(cx - r*0.9, cy - r*0.8, cx - r*0.2, cy - r*1.1, cx + r*0.46, cy - r);
+  g.closePath();
+}
+
+function wrapText(g, text, maxW){
+  const lines = [];
+  let line = '';
+  for(const ch of text){
+    if(g.measureText(line + ch).width > maxW && line){
+      lines.push(line); line = ch;
+    }else{
+      line += ch;
+    }
+  }
+  if(line) lines.push(line);
+  return lines;
+}
+
+async function saveResultImage(){
+  const btn = $('#saveBtn');
+  btn.disabled = true;
+  btn.textContent = '正在生成…';
+  try{
+    const { winner, counts } = lastResult;
+    const t = TYPES[winner];
+    const pct = k => Math.round(counts[k] / QUESTIONS.length * 100);
+
+    const W = 760, H = 1200, S = 2;
+    const FONT = '"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif';
+    const INK = '#33261A';
+
+    const cv = document.createElement('canvas');
+    cv.width = W * S; cv.height = H * S;
+    const g = cv.getContext('2d');
+    g.scale(S, S);
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+
+    // 背景
+    const bg = g.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#FFF8EC');
+    bg.addColorStop(1, '#FFE9CE');
+    g.fillStyle = bg;
+    g.fillRect(0, 0, W, H);
+
+    // 装饰
+    g.fillStyle = 'rgba(255,193,94,.32)';
+    g.beginPath(); g.arc(W-50, 90, 120, 0, 7); g.fill();
+    g.fillStyle = 'rgba(240,180,41,.45)';
+    [[76,190],[676,320],[64,780],[698,880],[96,1082],[668,1080]].forEach(([x,y])=>{
+      g.save(); g.translate(x,y); g.rotate(.5);
+      g.fillRect(-5,-7,10,14); g.restore();
+    });
+
+    // 顶部标签
+    const label = 'DISC × 西游记 · 取经人格测试';
+    g.font = '800 21px ' + FONT;
+    const lw = g.measureText(label).width + 48;
+    rr(g, W/2 - lw/2, 46, lw, 46, 23);
+    g.fillStyle = '#fff'; g.fill();
+    g.lineWidth = 3; g.strokeStyle = INK; g.stroke();
+    g.fillStyle = '#8A6A3A';
+    g.fillText(label, W/2, 70);
+
+    // 角色底 + 立绘
+    g.fillStyle = t.light;
+    blobPath(g, W/2, 352, 158);
+    g.fill();
+    const img = await svgToImg(ART[winner].replace('<svg ', '<svg width="600" height="600" '));
+    g.drawImage(img, W/2 - 152, 196, 304, 304);
+
+    // 名字 / 称号
+    g.fillStyle = INK;
+    g.font = '900 58px ' + FONT;
+    g.fillText(t.name, W/2, 578);
+    g.fillStyle = t.color;
+    g.font = '800 21px ' + FONT;
+    g.fillText(t.epithet, W/2, 622);
+
+    // 标签行
+    g.font = '800 17px ' + FONT;
+    const pills = ['DISC · ' + t.disc.split(' ')[1], ...t.keywords];
+    const gap = 10;
+    const widths = pills.map(p => g.measureText(p).width + 34);
+    let total = widths.reduce((a,b)=>a+b, 0) + gap*(pills.length-1);
+    let x = W/2 - total/2;
+    pills.forEach((p, idx)=>{
+      rr(g, x, 652, widths[idx], 36, 18);
+      if(idx === 0){ g.fillStyle = t.color; g.fill(); g.fillStyle = '#fff'; }
+      else{ g.fillStyle = '#F7EDDC'; g.fill(); g.fillStyle = '#8A6A3A'; }
+      g.fillText(p, x + widths[idx]/2, 671);
+      x += widths[idx] + gap;
+    });
+
+    // 台词气泡
+    g.font = '800 19px ' + FONT;
+    const qLines = wrapText(g, t.quote, 560);
+    const qh = qLines.length * 30 + 34;
+    rr(g, W/2 - 310, 712, 620, qh, 20);
+    g.fillStyle = '#fff'; g.fill();
+    g.lineWidth = 3; g.strokeStyle = INK; g.stroke();
+    g.fillStyle = '#5A4632';
+    qLines.forEach((ln, i)=> g.fillText(ln, W/2, 712 + 27 + i*30));
+
+    // DISC 能量条
+    g.fillStyle = '#B08A54';
+    g.font = '900 17px ' + FONT;
+    g.fillText('你 的  D I S C  能 量', W/2, 800);
+
+    const barX = 150, barW = 460;
+    ORDER.forEach((k, i)=>{
+      const y = 838 + i * 46;
+      g.textAlign = 'left';
+      g.fillStyle = '#6B5A47';
+      g.font = '800 17px ' + FONT;
+      g.fillText(k + ' ' + BAR[k].label, 84, y + 9);
+      rr(g, barX, y, barW, 18, 9);
+      g.fillStyle = '#F4EADB'; g.fill();
+      rr(g, barX, y, Math.max(barW * pct(k)/100, 18), 18, 9);
+      g.fillStyle = BAR[k].color; g.fill();
+      g.textAlign = 'right';
+      g.fillText(pct(k) + '%', barX + barW + 58, y + 9);
+      g.textAlign = 'center';
+    });
+
+    // 性格一句话
+    g.fillStyle = '#7A5C36';
+    g.font = '600 17px ' + FONT;
+    const dLines = wrapText(g, t.desc, 600);
+    dLines.slice(0, 3).forEach((ln, i)=> g.fillText(ln, W/2, 1046 + i*28));
+
+    // 底部署名
+    g.fillStyle = '#B49B7B';
+    g.font = '800 14px ' + FONT;
+    g.fillText('— 12 道题测出你的取经人格 · 快来测测你是谁 —', W/2, 1168);
+
+    // 下载
+    if (window.__CAPTURE_CANVAS) window.__CAPTURE_CANVAS(cv);
+    const a = document.createElement('a');
+    a.download = '我的取经人格-' + t.name + '.png';
+    a.href = cv.toDataURL('image/png');
+    a.click();
+  }catch(e){
+    alert('图片生成失败，请重试：' + e.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = '保存结果为图片';
+  }
+}
+
+/* 事件绑定 */
+buildCast();
+$('#startBtn').addEventListener('click', startQuiz);
+$('#backBtn').addEventListener('click', ()=>{
+  if(state.i > 0){ state.i--; renderQ(); }
+});
+</script>
+</body>
+</html>
